@@ -11,23 +11,35 @@ dayjs.locale('es');
 // ==================================================
 
 function contarViernes13() {
+  let contador = 0
 
+
+
+  return contador
 }
 
-function calcularEdad() {
-
+function calcularEdad(fechaNac) {
+  mostrarEdad(fechaNac)
 }
 
-function mostrarEdad() {
-
+function mostrarEdad(fechaNac) {
+  document.querySelector('#resultado-edad').removeAttribute('hidden')
+  document.querySelector('#dias-edad').textContent=dayjs().diff(fechaNac, 'day')
+  document.querySelector('#horas-edad').textContent=dayjs().diff(fechaNac, 'hour')
+  document.querySelector('#segundos-edad').textContent=dayjs().diff(fechaNac, 'second')
+  document.querySelector('#dia-semana').textContent=fechaNac.format('dddd')
+  document.querySelector('#viernes').textContent='x'
 }
 
 function procesarFormularioEdad() {
-
+  
+  let input = document.querySelector('input')
+  let fechaNac = dayjs(input.value)
+  calcularEdad(fechaNac)
 }
 
 function iniciarEdad() {
-
+  procesarFormularioEdad()
 }
 
 // ==================================================
@@ -63,7 +75,13 @@ function actualizarRelojes() {
   actualizarZonasHorarias();
 }
 
-iniciarEdad();
+let boton = document.querySelector('button')
+boton.addEventListener('click', e => {
+  e.preventDefault()
+  iniciarEdad();
+})
+
+
 iniciarCuentaAtras();
 
 // Ejecutamos la función nada más empezar y creamos un intervalo
